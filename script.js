@@ -1,6 +1,10 @@
 let booksInLibrary = document.querySelector('.booksInLibrary');
+let showAllBooksBtn = document.querySelector('#showAllBooks');
+
+
 
 let myLibrary = ['Sacrificed', 'Order of the Phoenix', 'Catching Fire', 'Afraid of the World', 'The book of Mirdad'];
+
 
 function Book(author, title, numberOfPages, isRead) {
     this.author = author;
@@ -22,6 +26,7 @@ function showAllBooks() {
 
             let book_cover = document.createElement('div');
             book_cover.setAttribute('class', 'book-cover');
+            book_cover.innerHTML = `${myLibrary[i]} <br><br> Book Cover`;
             book_card.appendChild(book_cover);
 
             let book_title = document.createElement('h3');
@@ -57,18 +62,38 @@ function showAllBooks() {
 }
 
 
+function hideALlBooks () {
+    while (booksInLibrary.firstChild) {
+        booksInLibrary.removeChild(booksInLibrary.firstChild);
+      }
+}
+
+
 
 // modal script
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("#addNewBook");
 const closeButton = document.querySelector("dialog button");
-
 // "Show the dialog" button opens the dialog modally
 showButton.addEventListener("click", () => {
   dialog.showModal();
 });
-
 // "Close" button closes the dialog
 closeButton.addEventListener("click", () => {
   dialog.close();
 });
+
+
+
+
+// show all books and Hide all books toggle btn
+showAllBooksBtn.addEventListener('click', ()=>{
+    if (showAllBooksBtn.value === 'Show All Books') {
+        showAllBooksBtn.value = "Hide All Books";
+        showAllBooksBtn.setAttribute('onclick', 'hideALlBooks()');
+    }
+    else {
+        showAllBooksBtn.value = "Show All Books";
+        showAllBooksBtn.setAttribute('onclick', 'showAllBooks()');
+    }
+})

@@ -7,6 +7,7 @@
 body {
     background-color: rgb(161, 143, 190);
     color: white;
+    margin: 35px 0;
 }
 
 h1 {
@@ -30,7 +31,7 @@ input[type="button"] {
     cursor: pointer;
 
     &:hover {
-        background-color: rgb(214, 192, 192);
+        background-color: rgb(134, 231, 175);
     }
 }
 
@@ -66,6 +67,14 @@ input[type="button"] {
     height: 360px;
     background-color: blueviolet;
     margin-bottom: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 250%;
+    padding: 32px;
+    border: 3px solid yellow;
+    border-radius: 16px;
+    border-left-width: 27px;
 }
 
 .readThisBook {
@@ -89,7 +98,10 @@ dialog {
     width: 500px;
     height: 600px;
     border: 5px solid rgb(61, 7, 255);
-    border-radius: 17px;
+    border-top-left-radius: 140px;
+    border-bottom-right-radius: 140px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
     padding: 45px;
     background-color: aquamarine;
 
@@ -136,9 +148,10 @@ dialog {
         width: 130px;
         height: 30px;
         font-size: 1.2rem;
+        border-radius: 12px;
 
         &:hover {
-            background-color: greenyellow;
+            background-color: rgb(47, 255, 64);
             cursor: pointer;
         }
     }
@@ -152,5 +165,10 @@ dialog {
         width: 30px;
         height: 20px;
         border-radius: 5px;
+
+        &:hover{
+            background-color: red;
+            color: white;
+        }
     }
 }
