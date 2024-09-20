@@ -5,11 +5,43 @@
 }
 
 body {
-    background-color: rgb(161, 143, 190);
+    background-image: linear-gradient(
+        45deg,
+        magenta,
+        rebeccapurple,
+        dodgerblue,
+        green
+      );
+    /* background-color: rgb(161, 143, 190); */
     color: white;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.welcomeMsg{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 3rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    & span:first-child {
+        font-weight: 900;
+        color: rgb(153, 255, 0);
+        font-size: 6rem;
+        justify-content: baseline;
+    }
+    & span:last-child {
+        font-weight: 900;
+        color: rgb(216, 204, 236);
+        font-size: 5rem;
+        justify-content: baseline;
+        text-decoration: wavy underline rgb(88, 100, 88);
+    }
 }
 
 h1 {
@@ -175,8 +207,6 @@ dialog {
         }
     }
 }
-
-
 
 
 

@@ -1,6 +1,6 @@
 let booksInLibrary = document.querySelector('.booksInLibrary');
 let showAllBooksBtn = document.querySelector('#showAllBooks');
-
+let welcomeMsgSection = document.querySelector('.welcomeMsg');
 
 
 let myLibrary = ['Sacrificed', 'Order of the Phoenix', 'Catching Fire', 'Afraid of the World', 'The book of Mirdad'];
@@ -88,11 +88,14 @@ closeButton.addEventListener("click", () => {
 
 // show all books and Hide all books toggle btn
 showAllBooksBtn.addEventListener('click', ()=>{
+    welcomeMsgSection.style.display = 'none';
     if (showAllBooksBtn.value === 'Show All Books') {
+        
         showAllBooksBtn.value = "Hide All Books";
         showAllBooksBtn.setAttribute('onclick', 'hideALlBooks()');
     }
     else {
+        welcomeMsgSection.style.display = 'flex';
         showAllBooksBtn.value = "Show All Books";
         showAllBooksBtn.setAttribute('onclick', 'showAllBooks()');
     }
