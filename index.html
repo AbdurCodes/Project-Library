@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,46 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <h1>Books Library</h1>
     <div class="addShowBtns">
-        <input type="button" value="Show All Books">
-        <input type="button" value="Add New Book">
+        <input type="button" onclick="showAllBooks()" value="Show All Books">
+        <!-- also there should be a Hide All Books toggle -->
+        <input type="button" id="addNewBook" value="Add New Book" onclick="showDialog()">
     </div>
+    <hr>
     <div class="booksInLibrary">
-        <div class="bookCard">
-            <img src="" alt="">
 
-        </div>
     </div>
+
+    <dialog>
+        <div class="modalCloseBtn">
+            <button autofocus>x</button>
+        </div>
+        <h2>Add New Book</h2>
+        <form method="dialog">
+            <div class="modal-items">
+                <label for="">Book name: </label>
+                <input type="text">
+            </div>
+            <div class="modal-items">
+                <label for="">Author: </label>
+                <input type="text">
+            </div>
+            <div class="modal-items">
+                <label for="">No. of pages: </label>
+                <input type="number">
+            </div>
+            <div class="haveReadTHisBook">
+                <input type="checkbox" id="isRead"><label for="isRead">Have read this book</label>
+            </div>
+            <div class="submitBtn">
+                <input type="submit">
+            </div>
+        </form>
+    </dialog>
+
 </body>
+
 </html>
