@@ -34,6 +34,12 @@ function showAllBooks() {
         book_title.textContent = `${myLibrary[i]}`;
         book_card.appendChild(book_title);
 
+        let readingStatus = document.createElement('p');
+        readingStatus.textContent = '           Not Read           ';
+        readingStatus.setAttribute('class', 'readingStatus');
+        readingStatus.style.whiteSpace = 'pre';
+        book_card.appendChild(readingStatus);
+
         let book_actions = document.createElement('div');
         book_actions.setAttribute('class', 'book-actions');
         book_card.appendChild(book_actions);
@@ -49,11 +55,13 @@ function showAllBooks() {
 
         let inputElement = document.createElement('input');
         inputElement.type = 'checkbox';
-        inputElement.id = 'isRead';
+        inputElement.id = 'isReadInLibrary';
+        inputElement.setAttribute('class', 'isReadInLibraryClass');
+        // inputElement.class = 'isReadInLibraryClass';
         readThisBook.appendChild(inputElement);
 
         let labelElement = document.createElement('label');
-        labelElement.for = 'isRead';
+        labelElement.for = 'isReadInLibrary';
         labelElement.textContent = 'Have read this book';
         readThisBook.appendChild(labelElement);
 
@@ -89,6 +97,25 @@ closeButton.addEventListener("click", () => {
 // show all books and Hide all books toggle btn
 showAllBooksBtn.addEventListener('click', () => {
 
+    let checkboxesIsReadInLibraryNodeList = document.querySelectorAll('.isReadInLibraryClass');
+    // console.log(typeof checkboxesIsReadInLibraryNodeList);
+    // console.log(checkboxesIsReadInLibraryNodeList);
+    let checkboxesIsReadInLibraryList = Array.from(checkboxesIsReadInLibraryNodeList)
+    checkboxesIsReadInLibraryList.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            // console.log(checkbox);
+            let child = checkbox.parentNode.parentNode.parentNode.children[2];
+            if (checkbox.checked) {
+                child.textContent = '              Read               ';
+                child.style.backgroundColor = 'green';
+            } else {
+                child.textContent = '           Not Read           ';
+                child.style.backgroundColor = 'red';
+            }
+        })
+    })
+
+
     welcomeMsgSection.style.display = 'none';
     let bookDeleteBtnNodeList = document.querySelectorAll('.delete-btn');
 
@@ -120,8 +147,3 @@ showAllBooksBtn.addEventListener('click', () => {
         showAllBooksBtn.setAttribute('onclick', 'showAllBooks()');
     }
 })
-
-
-
-
-

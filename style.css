@@ -12,7 +12,6 @@ body {
         dodgerblue,
         green
       );
-    /* background-color: rgb(161, 143, 190); */
     color: white;
     min-height: 100vh;
     display: flex;
@@ -112,6 +111,23 @@ input[type="button"] {
     border-radius: 16px;
     border-left-width: 27px;
 }
+
+.book-card{
+    position: relative;
+    overflow: hidden;
+}
+
+.readingStatus{
+    position: absolute;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    transform: rotate(-45deg);
+    font-weight: 800;
+    top: 30px;
+    left: -35px;
+}
+
 
 .readThisBook {
     display: flex;
