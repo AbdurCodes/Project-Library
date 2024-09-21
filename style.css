@@ -25,19 +25,19 @@ body {
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    font-size: 3rem;
+    font-size: 4vw;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
     & span:first-child {
         font-weight: 900;
         color: rgb(153, 255, 0);
-        font-size: 6rem;
+        font-size: 6vw;
         justify-content: baseline;
     }
     & span:last-child {
         font-weight: 900;
-        color: rgb(216, 204, 236);
-        font-size: 5rem;
+        color: rgb(90, 47, 21);
+        font-size: 5vw;
         justify-content: baseline;
         text-decoration: wavy underline rgb(88, 100, 88);
     }
@@ -100,7 +100,7 @@ input[type="button"] {
 .book-cover {
     width: 280px;
     height: 360px;
-    background-color: blueviolet;
+    background-color: rgb(146, 17, 12);
     margin-bottom: 7px;
     display: flex;
     justify-content: center;
