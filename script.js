@@ -1,149 +1,198 @@
 let booksInLibrary = document.querySelector('.booksInLibrary');
 let showAllBooksBtn = document.querySelector('#showAllBooks');
 let welcomeMsgSection = document.querySelector('.welcomeMsg');
+let form = document.getElementById('myForm');
+let categories = document.querySelector('#categories');
+let favouriteBooks = document.querySelector('#favouriteBooks');
+let booksTracker = document.querySelector('#booksTracker');
 
 
-let myLibrary = ['The Book of Nothing', 'Sacrificed', 'Order of the Phoenix', 'Catching Fire', 'Afraid of the World', 'The book of Mirdad'];
+[categories, favouriteBooks, booksTracker].forEach(button => {
+    button.addEventListener('click', () => {
+        removeALlBooks();
+        welcomeMsgSection.style.display = 'flex';
+        welcomeMsgSection.textContent = "Feature Coming Soon!";
+        showAllBooksBtn.disabled = false;
+    })
+})
 
 
-function Book(author, title, numberOfPages, isRead) {
-    this.author = author;
-    this.title = title;
-    this.numberOfPages = numberOfPages;
-    this.isRead = isRead;
-}
-
-function addBookToLibrary() {
-    // do stuff here
-}
-
-
-function showAllBooks() {
-    for (let i = 0; i < myLibrary.length; i++) {
-
-        let book_card = document.createElement('div');
-        book_card.setAttribute('class', 'book-card');
-
-        let book_cover = document.createElement('div');
-        book_cover.setAttribute('class', 'book-cover');
-        book_cover.innerHTML = `${myLibrary[i]} <br><br> Book Cover`;
-        book_card.appendChild(book_cover);
-
-        let book_title = document.createElement('h3');
-        book_title.setAttribute('class', 'book-title');
-        book_title.textContent = `${myLibrary[i]}`;
-        book_card.appendChild(book_title);
-
-        let readingStatus = document.createElement('p');
-        readingStatus.textContent = '           Not Read           ';
-        readingStatus.setAttribute('class', 'readingStatus');
-        readingStatus.style.whiteSpace = 'pre';
-        book_card.appendChild(readingStatus);
-
-        let book_actions = document.createElement('div');
-        book_actions.setAttribute('class', 'book-actions');
-        book_card.appendChild(book_actions);
-
-        let delete_button = document.createElement('button');
-        delete_button.setAttribute('class', 'delete-btn');
-        delete_button.textContent = 'Delete This Book';
-        book_actions.appendChild(delete_button);
-
-        let readThisBook = document.createElement('div');
-        readThisBook.setAttribute('class', 'readThisBook');
-        book_actions.appendChild(readThisBook);
-
-        let inputElement = document.createElement('input');
-        inputElement.type = 'checkbox';
-        inputElement.id = 'isReadInLibrary';
-        inputElement.setAttribute('class', 'isReadInLibraryClass');
-        // inputElement.class = 'isReadInLibraryClass';
-        readThisBook.appendChild(inputElement);
-
-        let labelElement = document.createElement('label');
-        labelElement.for = 'isReadInLibrary';
-        labelElement.textContent = 'Have read this book';
-        readThisBook.appendChild(labelElement);
-
-        booksInLibrary.appendChild(book_card);
-    }
-}
-
-
-function hideALlBooks() {
+// hide all books in library from view
+function removeALlBooks() {
     while (booksInLibrary.firstChild) {
         booksInLibrary.removeChild(booksInLibrary.firstChild);
     }
 }
 
+// book object constructor
+function Book(title, author, numberOfPages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.numberOfPages = numberOfPages;
+    this.isRead = isRead;
+}
+
+
+// demo books for lib
+let book1 = new Book('The Book of Nothing', 'Osho', 112, true);
+let book2 = new Book('Sacrificed', 'John Babbage', 213, false);
+let book3 = new Book('Order of the Phoenix', 'Goete', 98, true);
+let book4 = new Book('Catching Fire', "Charles Fire", 276, false);
+let book5 = new Book('Afraid of the World', 'Duen Nash', 34, true);
+let book6 = new Book('The book of Mirdad', 'Leo Tolstoy', 425, false);
+
+let myLibrary = [book1, book2, book3, book4, book5, book6];
+
+
+form.addEventListener('submit', function () {
+
+    showAllBooksBtn.disabled = false;
+
+    let bookTitle = document.getElementById('bookName').value;
+    let authorName = document.getElementById('authorName').value;
+    let pagesInBook = document.getElementById('pagesInBook').value;
+    let isReadinForm = document.getElementById('isReadinForm').checked;
+
+    myLibrary.push(new Book(bookTitle, authorName, pagesInBook, isReadinForm));
+
+    welcomeMsgSection.style.display = 'flex';
+    welcomeMsgSection.textContent = "New Book added successfully to the library.";
+   
+})
 
 
 // modal script
 const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("#addNewBook");
-const closeButton = document.querySelector("dialog button");
-// "Show the dialog" button opens the dialog modally
-showButton.addEventListener("click", () => {
+const addNewBook = document.querySelector("#addNewBook");
+const closeModal = document.querySelector("dialog button");
+// "Add New Book" button opens the dialog modally
+addNewBook.addEventListener("click", () => {
     dialog.showModal();
+    document.getElementById('bookName').value = '';
+    document.getElementById('authorName').value = '';
+    document.getElementById('pagesInBook').value = '';
+    document.getElementById('isReadinForm').checked = '';
 });
-// "Close" button closes the dialog
-closeButton.addEventListener("click", () => {
+// "x" button closes the dialog
+closeModal.addEventListener("click", () => {
     dialog.close();
 });
-
 
 
 
 // show all books and Hide all books toggle btn
 showAllBooksBtn.addEventListener('click', () => {
 
-    let checkboxesIsReadInLibraryNodeList = document.querySelectorAll('.isReadInLibraryClass');
-    // console.log(typeof checkboxesIsReadInLibraryNodeList);
-    // console.log(checkboxesIsReadInLibraryNodeList);
-    let checkboxesIsReadInLibraryList = Array.from(checkboxesIsReadInLibraryNodeList)
-    checkboxesIsReadInLibraryList.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            // console.log(checkbox);
-            let child = checkbox.parentNode.parentNode.parentNode.children[2];
-            if (checkbox.checked) {
-                child.textContent = '              Read               ';
-                child.style.backgroundColor = 'green';
-            } else {
-                child.textContent = '           Not Read           ';
-                child.style.backgroundColor = 'red';
-            }
-        })
-    })
-
-
-    welcomeMsgSection.style.display = 'none';
-    let bookDeleteBtnNodeList = document.querySelectorAll('.delete-btn');
-
-    let bookDeleteBtnList = Array.from(bookDeleteBtnNodeList);
-
-    bookDeleteBtnList.forEach((bookDeleteBtn) => {
-        bookDeleteBtn.addEventListener('click', () => {
-            bookDeleteBtn.parentNode.parentNode.remove();
-            // console.log(myLibrary);
-            myLibrary = myLibrary.filter(item => item != bookDeleteBtn.parentNode.parentNode.children[1].textContent);
-            // console.log(myLibrary);
-            if (myLibrary.length < 1) {
-                welcomeMsgSection.style.display = 'flex';
-                welcomeMsgSection.textContent = "The library has no books. Try to add some.";
-                showAllBooksBtn.disabled = true;
-                showAllBooksBtn.style = 'none';
-            }
-        })
-
-    })
-    if (showAllBooksBtn.value === 'Show All Books') {
-
-        showAllBooksBtn.value = "Hide All Books";
-        showAllBooksBtn.setAttribute('onclick', 'hideALlBooks()');
-    }
-    else {
+    // display msg for no books in library
+    if (myLibrary.length < 1) {
         welcomeMsgSection.style.display = 'flex';
-        showAllBooksBtn.value = "Show All Books";
-        showAllBooksBtn.setAttribute('onclick', 'showAllBooks()');
+        welcomeMsgSection.textContent = "There are no books in the library.";
+        showAllBooksBtn.disabled = true;
+    }
+
+    // hide welcome msg in case there are books in library
+    else {
+        welcomeMsgSection.style.display = 'none';
+        showAllBooksBtn.disabled = true;
+
+        removeALlBooks();
+
+        for (let i = 0; i < myLibrary.length; i++) {
+
+            let book_card = document.createElement('div');
+            book_card.setAttribute('class', 'book-card');
+
+            let book_cover = document.createElement('div');
+            book_cover.setAttribute('class', 'book-cover');
+            book_cover.innerHTML = `${myLibrary[i].title} <br>by<br> ${myLibrary[i].author} <br><br> Total pages: ${myLibrary[i].numberOfPages}`;
+            book_card.appendChild(book_cover);
+
+            let book_title = document.createElement('h3');
+            book_title.setAttribute('class', 'book-title');
+            book_title.textContent = `${myLibrary[i].title}`;
+            book_card.appendChild(book_title);
+
+            let readingStatus = document.createElement('p');
+            if (myLibrary[i].isRead === true) {
+                readingStatus.textContent = '              Read               ';
+                readingStatus.style.backgroundColor = 'green';
+            } else {
+                readingStatus.textContent = '           Not Read           ';
+                readingStatus.style.backgroundColor = 'red';
+            }
+            readingStatus.setAttribute('class', 'readingStatus');
+            readingStatus.style.whiteSpace = 'pre';
+            book_card.appendChild(readingStatus);
+
+            let book_actions = document.createElement('div');
+            book_actions.setAttribute('class', 'book-actions');
+            book_card.appendChild(book_actions);
+
+            let delete_button = document.createElement('button');
+            delete_button.setAttribute('class', 'delete-btn');
+            delete_button.textContent = 'Delete This Book';
+            book_actions.appendChild(delete_button);
+
+            let readThisBook = document.createElement('div');
+            readThisBook.setAttribute('class', 'readThisBook');
+            book_actions.appendChild(readThisBook);
+
+            let inputElement = document.createElement('input');
+            inputElement.type = 'checkbox';
+            inputElement.id = 'isReadInLibrary';
+            inputElement.setAttribute('class', 'isReadInLibraryClass');
+            readThisBook.appendChild(inputElement);
+            if (myLibrary[i].isRead) {
+                inputElement.checked = true;
+            }
+            else {
+                inputElement.checked = false;
+            }
+
+            let labelElement = document.createElement('label');
+            labelElement.for = 'isReadInLibrary';
+            labelElement.textContent = 'Have read this book';
+            readThisBook.appendChild(labelElement);
+
+            booksInLibrary.appendChild(book_card);
+        }
+
+        // change the reading status of books
+        let checkboxesIsReadInLibraryNodeList = document.querySelectorAll('.isReadInLibraryClass');
+        let checkboxesIsReadInLibraryList = Array.from(checkboxesIsReadInLibraryNodeList)
+        checkboxesIsReadInLibraryList.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', () => {
+                // console.log(myLibrary[i].isRead);
+                let child = checkbox.parentNode.parentNode.parentNode.children[2];
+                if (checkbox.checked) {
+                    child.textContent = '              Read               ';
+                    child.style.backgroundColor = 'green';
+                    myLibrary[index].isRead = true;
+                    // console.log(myLibrary[i].isRead);
+                } else {
+                    child.textContent = '           Not Read           ';
+                    child.style.backgroundColor = 'red';
+                    myLibrary[index].isRead = false;
+                    // console.log(myLibrary[i].isRead);
+                }
+            })
+        })
+
+        // // delete a book from the library
+        let bookDeleteBtnNodeList = document.querySelectorAll('.delete-btn');
+        let bookDeleteBtnList = Array.from(bookDeleteBtnNodeList);
+        bookDeleteBtnList.forEach((bookDeleteBtn, index) => {
+            bookDeleteBtn.addEventListener('click', () => {
+                myLibrary.pop(myLibrary[index]);
+                bookDeleteBtn.parentNode.parentNode.remove();
+                myLibraryNew = myLibrary.filter(item => item != bookDeleteBtn.parentNode.parentNode.children[1].textContent);
+
+                if (myLibraryNew.length < 1 && !booksInLibrary.hasChildNodes()) {
+                    welcomeMsgSection.style.display = 'flex';
+                    welcomeMsgSection.textContent = "You just deleted all the books from the library.";
+                    showAllBooksBtn.disabled = true;
+                }
+            })
+        })
     }
 })

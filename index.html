@@ -12,7 +12,13 @@
 <body>
     <h1>World Books Library</h1>
     <div class="addShowBtns">
-        <input type="button" id="showAllBooks" onclick="showAllBooks()" value="Show All Books">
+        <input type="button" id="categories" value="Categories">
+        <input type="button" id="showAllBooks" value="Show All Books">
+        <input type="button" id="favouriteBooks" value="Favourite Books">
+        <input type="button" id="booksTracker" value="Books Tracker">
+        <!-- <p>Read</p>
+        <p>Reading...</p>
+        <p>Not Read</p> -->
         <input type="button" id="addNewBook" value="Add New Book">
     </div>
     <hr>
@@ -36,18 +42,19 @@
             <button autofocus>x</button>
         </div>
         <h2>Add New Book</h2>
-        <form method="dialog">
+        
+        <form method="dialog" id="myForm">
             <div class="modal-items">
                 <label for="bookName">Book name: </label>
-                <input type="text" id="bookName">
+                <input type="text" id="bookName" required>
             </div>
             <div class="modal-items">
                 <label for="authorName">Author: </label>
-                <input type="text" id="authorName">
+                <input type="text" id="authorName" required>
             </div>
             <div class="modal-items">
                 <label for="pagesInBook">No. of pages: </label>
-                <input type="number" id="pagesInBook">
+                <input type="number" id="pagesInBook" required>
             </div>
             <div class="haveReadTHisBook">
                 <input type="checkbox" id="isReadinForm">
