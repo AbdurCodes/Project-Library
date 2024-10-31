@@ -7,6 +7,24 @@ let favouriteBooks = document.querySelector('#favouriteBooks');
 let booksTracker = document.querySelector('#booksTracker');
 
 
+class BookClass {
+    constructor(name, author, noOfPages, isRead) {
+        this.name = name;
+        this.author = author;
+        this.noOfPages = noOfPages;
+        this.isRead = isRead;
+    }
+}
+
+// book object constructor
+// function Book(title, author, numberOfPages, isRead) {
+//     this.title = title;
+//     this.author = author;
+//     this.numberOfPages = numberOfPages;
+//     this.isRead = isRead;
+// }
+
+
 [categories, favouriteBooks, booksTracker].forEach(button => {
     button.addEventListener('click', () => {
         removeALlBooks();
@@ -24,22 +42,14 @@ function removeALlBooks() {
     }
 }
 
-// book object constructor
-function Book(title, author, numberOfPages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.numberOfPages = numberOfPages;
-    this.isRead = isRead;
-}
-
 
 // demo books for lib
-let book1 = new Book('The Book of Nothing', 'Osho', 112, true);
-let book2 = new Book('Sacrificed', 'John Babbage', 213, false);
-let book3 = new Book('Order of the Phoenix', 'Goete', 98, true);
-let book4 = new Book('Catching Fire', "Charles Fire", 276, false);
-let book5 = new Book('Afraid of the World', 'Duen Nash', 34, true);
-let book6 = new Book('The book of Mirdad', 'Leo Tolstoy', 425, false);
+let book1 = new BookClass('The Book of Nothing', 'Osho', 112, true);
+let book2 = new BookClass('Sacrificed', 'John Babbage', 213, false);
+let book3 = new BookClass('Order of the Phoenix', 'Goete', 98, true);
+let book4 = new BookClass('Catching Fire', "Charles Fire", 276, false);
+let book5 = new BookClass('Afraid of the World', 'Duen Nash', 34, true);
+let book6 = new BookClass('The book of Mirdad', 'Leo Tolstoy', 425, false);
 
 let myLibrary = [book1, book2, book3, book4, book5, book6];
 
@@ -53,7 +63,10 @@ form.addEventListener('submit', function () {
     let pagesInBook = document.getElementById('pagesInBook').value;
     let isReadinForm = document.getElementById('isReadinForm').checked;
 
-    myLibrary.push(new Book(bookTitle, authorName, pagesInBook, isReadinForm));
+    let bookN = new BookClass(bookTitle, authorName, pagesInBook, isReadinForm);
+    myLibrary.push(bookN);
+
+    showAllBooksBtn.click();
 
     welcomeMsgSection.style.display = 'flex';
     welcomeMsgSection.textContent = "New Book added successfully to the library.";
@@ -104,12 +117,12 @@ showAllBooksBtn.addEventListener('click', () => {
 
             let book_cover = document.createElement('div');
             book_cover.setAttribute('class', 'book-cover');
-            book_cover.innerHTML = `${myLibrary[i].title} <br>by<br> ${myLibrary[i].author} <br><br> Total pages: ${myLibrary[i].numberOfPages}`;
+            book_cover.innerHTML = `${myLibrary[i].name} <br>by<br> ${myLibrary[i].author} <br><br> Total pages: ${myLibrary[i].noOfPages}`;
             book_card.appendChild(book_cover);
 
             let book_title = document.createElement('h3');
             book_title.setAttribute('class', 'book-title');
-            book_title.textContent = `${myLibrary[i].title}`;
+            book_title.textContent = `${myLibrary[i].name}`;
             book_card.appendChild(book_title);
 
             let readingStatus = document.createElement('p');
